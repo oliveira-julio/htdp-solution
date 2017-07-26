@@ -1,0 +1,85 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 3.2.1) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+
+
+(define ATTENDANCE-BASE 120)
+(define ATTENDANCE-FACTOR 150)
+(define ATTENDANCE-TICKET-BASE 5)
+(define COST-BASE 180)
+(define COST-FACTOR 0.04)
+
+
+;; attendees : number  ->  number
+;; to compute the number of attendees, given ticket-price
+
+;; EXAMPLES
+;; the ticket price is 5, then the number of attendees is 120
+;; the ticket price is 4, then the number of attendees is 270
+;; the ticket price is 3, then the number of attendees is 420
+
+(define (attendees ticket-price)
+  (+ ATTENDANCE-BASE (* (- ATTENDANCE-TICKET-BASE ticket-price) ATTENDANCE-FACTOR ))
+)
+
+
+
+;; revenue : number  ->  number
+;; to compute the revenue, given ticket-price
+
+;; EXAMPLES
+;; the ticket price is 5, then the revenue is 600
+;; the ticket price is 4, then the revenue is 1080
+;; the ticket price is 3, then the revenue is 1260
+
+(define (revenue ticket-price)
+  (* ticket-price (attendees ticket-price))
+)
+
+
+
+;; cost : number  ->  number
+;; to compute the costs, given ticket-price
+
+;; EXAMPLES
+;; the ticket price is 5, then the cost is 184.8
+;; the ticket price is 4, then the cost is 190.8
+;; the ticket price is 3, then the cost is 196.8
+
+(define (cost ticket-price)
+  (+ COST-BASE (* COST-FACTOR (attendees ticket-price)))
+)
+
+
+
+;; profit : number  ->  number
+;; to compute the profit as the difference between revenue and costs
+;; at some given ticket-price
+
+;; EXAMPLES
+;; the ticket price is 5 then the profit is 415.2
+;; the ticket price is 4 then the profit is 889.2
+;; the ticket price is 3 then the profit is 1063.2
+
+(define (profit ticket-price)
+  (- (revenue ticket-price) (cost ticket-price))
+)
+
+
+;; TESTS
+
+(attendees 5) "should be" 120
+(attendees 4) "should be" 270
+(attendees 3) "should be" 420
+
+(revenue 5) "should be" 600
+(revenue 4) "should be" 1080
+(revenue 3) "should be" 1260
+
+(cost 5) "should be" 184.8
+(cost 4) "should be" 190.8
+(cost 3) "should be" 196.8
+
+(profit 5) "should be" 415.2
+(profit 4) "should be" 889.2
+(profit 3) "should be" 1063.2
