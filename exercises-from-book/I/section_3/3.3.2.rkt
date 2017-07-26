@@ -28,8 +28,8 @@
 ;; volume-cylinder: number number -> number
 ;; determines the volume of a cylinder, given the radius of base and the height.
 ;; the radius is 0 or  the height is 0,   the volume is 0
-;; the radius is 1 and the height is 200, the volume is 628
-;; the radius is 5 and the height is 10,  the volume is 785
+;; the radius is 1 and the height is 200, the volume is #i628.3185307179587
+;; the radius is 5 and the height is 10,  the volume is #i785.3981633974483
 (define (volume-cylinder radius height)
   (* height (area-of-disk radius))
 )
