@@ -1,7 +1,21 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 3.1.2) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-  
+
+
+;; attendees : number  ->  number
+;; to compute the number of attendees, given ticket-price
+
+;; EXAMPLES
+;; the ticket price is 5, then the number of attendees is 120
+;; the ticket price is 4, then the number of attendees is 270
+;; the ticket price is 3, then the number of attendees is 420
+
+(define (attendees ticket-price)
+  (+ 120 (* (- 5 ticket-price) 150 ))
+)
+
+
 
 ;; revenue : number  ->  number
 ;; to compute the revenue, given ticket-price
@@ -14,11 +28,6 @@
 (define (revenue ticket-price)
   (* ticket-price (attendees ticket-price))
 )
-
-;; TESTS
-(revenue 5)"should be" 600
-(revenue 4)"should be" 1080
-(revenue 3)"should be" 1260
 
 
 
@@ -33,11 +42,6 @@
 (define (cost ticket-price)
   (+ 180 (* 0.04 (attendees ticket-price)))
 )
-
-;; TESTS
-(cost 5) "should be" 184.8
-(cost 4) "should be" 190.8
-(cost 3) "should be" 196.8
 
 
 
@@ -54,10 +58,24 @@
   (- (revenue ticket-price) (cost ticket-price))
 )
 
+
 ;; TESTS
-(profit 5)"should be" 415.2
-(profit 4)"should be" 889.2
-(profit 3)"should be" 1063.2
+
+(attendees 5) "should be" 120
+(attendees 4) "should be" 270
+(attendees 3) "should be" 420
+
+(revenue 5) "should be" 600
+(revenue 4) "should be" 1080
+(revenue 3) "should be" 1260
+
+(cost 5) "should be" 184.8
+(cost 4) "should be" 190.8
+(cost 3) "should be" 196.8
+
+(profit 5) "should be" 415.2
+(profit 4) "should be" 889.2
+(profit 3) "should be" 1063.2
 
 
 ;; the best of the three is ticket price equals to 3
