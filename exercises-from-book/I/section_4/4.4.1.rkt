@@ -19,6 +19,10 @@
 
 ;; interest: number -> number
 ;; Determines the interest for the given amount >=0
+;; Examples:
+;; the amount is 1000, then the interest is 40
+;; the amount is 5000, then the interest is 225
+;; the amount is 8000, then the interest is 400
 (define (interest number)
   (* number
      (interest-rate number))
